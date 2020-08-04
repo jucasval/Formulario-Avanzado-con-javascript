@@ -13,7 +13,100 @@
 
 <body>
     <main>
+        <form action="" class="formulario" id="formulario">
 
+            <!-- Grupo: Usuario -->
+            <div class="formulario__grupo" id="grupo__usuario">
+                <label for="usuario" class="formulario__label">Usuario</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" name="usuario" id="usuario" class="formulario__input" placeholder="jucasval">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Tiene que estar comprendido entre 4 y 16 dígitos.
+                    Sólo puede contener números, letras o guiones bajos.
+                </p>
+            </div>
+
+            <!-- Grupo: Nombre -->
+            <div class="formulario__grupo" id="grupo__nombre">
+                <label for="nombre" class="formulario__label">Nombre</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" name="nombre" id="nombre" class="formulario__input"
+                        placeholder="Juan Francisco Castilla">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Tiene que estar comprendido entre 4 y 16 dígitos.
+                    Sólo puede contener números, letras o guiones bajos.
+                </p>
+            </div>
+
+            <!-- Grupo: Contraseña -->
+            <div class="formulario__grupo" id="grupo__password">
+                <label for="password" class="formulario__label">Contraseña</label>
+                <div class="formulario__grupo-input">
+                    <input type="password" name="password" id="password" class="formulario__input">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Tiene que tener entre 4 y 12 dígitos</p>
+            </div>
+
+            <!-- Grupo: Contraseña2 -->
+            <div class="formulario__grupo" id="grupo__password2">
+                <label for="password2" class="formulario__label">Repetir Contraseña</label>
+                <div class="formulario__grupo-input">
+                    <input type="password" name="password2" id="password2" class="formulario__input">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Ambas contraseñas tienen que ser iguales</p>
+            </div>
+
+            <!-- Grupo: Correo electrónico -->
+            <div class="formulario__grupo" id="grupo__correo">
+                <label for="correo" class="formulario__label">Correo Electrónico</label>
+                <div class="formulario__grupo-input">
+                    <input type="email" name="correo" id="correo" class="formulario__input"
+                        placeholder="correo@correo.com">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Sólo puede contener números, letras, punto y guiones bajos.
+                </p>
+            </div>
+
+            <!-- Grupo: Teléfono -->
+            <div class="formulario__grupo" id="grupo__telefono">
+                <label for="telefono" class="formulario__label">Teléfono</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" name="telefono" id="telefono" class="formulario__input" placeholder="950667788">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Sólo puede contener números y el máximo son 14 dígitos</p>
+            </div>
+
+            <!-- Grupo: Terminos y condiciones -->
+            <div class="formulario__grupo" id="grupo__terminos">
+                <label class="formulario__label">
+                    <input class="formulario__checkbox" type="checkbox" name="terminos" id="terminos">
+                    Acepto los Términos y Condiciones
+                </label>
+            </div>
+
+            <!-- Mensaje error -->
+            <div class="formulario__mensaje" id="formulario__mensaje">
+                <p>
+                    <i class="fas fa-exclamation-triangle"></i> <b>Error:</b>
+                    Por favor, rellene el formulario correctamente
+                </p>
+            </div>
+
+            <!-- Grupo: Botón enviar -->
+            <div class="formulario__grupo formulario__grupo-btn-enviar">
+                <button class="formulario_btn" type="submit">Enviar</button>
+                <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">
+                    ¡Formulario enviado correctamente!
+                </p>
+            </div>
+
+        </form>
     </main>
 
 
