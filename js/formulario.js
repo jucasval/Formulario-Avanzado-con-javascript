@@ -8,13 +8,10 @@ const expresiones = {
     telefono: /^\d{7,14}$/ //7 a 14 números
 }
 
-//1º - ACCESO AL FORMULARIO
 const formulario = document.getElementById("formulario");
 
-//2º - ACCESO A "TODOS" LOS INPUTS DEL FORMULARIO
 const inputs = document.querySelectorAll("#formulario input");
 
-//3º - Ponemos a la escucha el formulario para enviar los datos.
 formulario.addEventListener('submit', function (e) {
     e.preventDefault(); //como es prueba y los datos no se envían realmente a ningún sitio, 
     //evitamos que se ejecute el evento
@@ -26,28 +23,44 @@ formulario.addEventListener("submit", (e) => {
 });
 */
 
-//5º - Desarrollamos la función 'validarFormulario'
 const validarFormulario = function (e) {
-    //console.log("validar formulario");
-    //console.log(e.target.name);
-    switch (e.target.name) {//usamos el atributo 'name' del html para identificar el input en el que estamos
+
+    switch (e.target.name) {
         case "usuario":
-            //console.log("usuario");
+            //1º - para comprobar la expresión regular de 'usuario'
+            if (expresiones.usuario.test(e.target.value)) {
+                //si verdadero
+                document.getElementById("grupo__usuario").classList.remove("formulario__grupo-incorrecto");
+                document.getElementById("grupo__usuario").classList.add("formulario__grupo-correcto");
+                document.querySelector("#grupo__usuario i").classList.remove("fa-times-circle");
+                document.querySelector("#grupo__usuario i").classList.add("fa-check-circle");
+                //eliminamos el mensaje de error
+                document.querySelector("#grupo__usuario .formulario__input-error").classList.remove("formulario__input-error-activo");
+            } else {
+                //si falso
+                document.getElementById("grupo__usuario").classList.remove("formulario__grupo-correcto");
+                document.getElementById("grupo__usuario").classList.add("formulario__grupo-incorrecto");
+                document.querySelector("#grupo__usuario i").classList.remove("fa-check-circle");
+                document.querySelector("#grupo__usuario i").classList.add("fa-times-circle");
+                //mostramos el mensaje de error
+                document.querySelector("#grupo__usuario .formulario__input-error").classList.add("formulario__input-error-activo");
+            }
+
             break;
         case "nombre":
-            //console.log("nombre");
+
             break;
         case "password":
-            //console.log("password");
+
             break;
         case "password2":
-            //console.log("password2");
+
             break;
         case "correo":
-            //console.log("correo");
+
             break;
         case "telefono":
-            //console.log("telefono");
+
             break;
 
     }
@@ -81,8 +94,6 @@ const validarFormulario = () => {
 };
 */
 
-//4º - Ponemos a la escucha cada uno de los inputs de tal manera que al levantar una tecla
-//o pulsemos con el ratón fuera del input ejecute la función 'validarFormulario'
 inputs.forEach(function (input) {
     input.addEventListener('keyup', validarFormulario);
     input.addEventListener('blur', validarFormulario);
