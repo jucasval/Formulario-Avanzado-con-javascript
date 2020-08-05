@@ -1,0 +1,8 @@
+//EXPRESIONES REGULARES
+const expresiones = {
+    usuario: /^[a-zA-Z0-9\_\-]{4,16}$/,//letras, números, guion y guion_bajo
+    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, //letras y espacios, pueden llevar acentos
+    password: /^.{4,12}$/, //4 a 12 dígitos
+    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    telefono: /^\d{7,14}$/ //7 a 14 números
+}
