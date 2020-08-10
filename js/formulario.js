@@ -71,6 +71,7 @@ const validarCampo = function (expresion, input, campo) {
 
 };
 
+//3º - Función para comprobar que ambas contraseñas son iguales o no. 
 const validarPassword2 = function () {
     const inputPassword1 = document.getElementById("password");
     const inputPassword2 = document.getElementById("password2");
