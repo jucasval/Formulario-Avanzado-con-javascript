@@ -23,28 +23,24 @@ const campos = {
 formulario.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    //1º - Validamos los "terminos y condiciones".
     const terminos = document.getElementById("terminos");
 
     if (campos.usuario && campos.nombre && campos.password && campos.correo
         && campos.telefono && terminos.checked) {
-        //2º - Añadimos a la condicion que los termindos estan 'checked'. 
+
         formulario.reset();
 
-        //3º - Mostramos el mensaje de exito al enviar el formulario durante 5 segundos
         document.getElementById("formulario__mensaje-exito").classList.add("formulario__mensaje-exito-activo");
 
         setTimeout(function () {
             document.getElementById("formulario__mensaje-exito").classList.remove("formulario__mensaje-exito-activo");
         }, 5000);
 
-        //4º - Eliminamos la palomita de los inputs. 
         document.querySelectorAll(".formulario__grupo-correcto").forEach(function (icono) {
             icono.classList.remove('formulario__grupo-correcto');
         });
 
     } else {
-        //5º - Mostramos el mensaje de error del formulario
         document.getElementById('formulario__mensaje').classList.add("formulario__mensaje-activo");
     }
 
