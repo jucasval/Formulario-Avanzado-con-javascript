@@ -17,35 +17,13 @@ formulario.addEventListener('submit', function (e) {
     //evitamos que se ejecute el evento
 });
 
-/*mismo código en ES6
-formulario.addEventListener("submit", (e) => {
-    e.preventDefault();
-});
-*/
-
 const validarFormulario = function (e) {
 
+    //1º.- Trasladamos el código a una función. Para reutilizarla en todos los inputs. 
     switch (e.target.name) {
         case "usuario":
-            //1º - para comprobar la expresión regular de 'usuario'
-            if (expresiones.usuario.test(e.target.value)) {
-                //si verdadero
-                document.getElementById("grupo__usuario").classList.remove("formulario__grupo-incorrecto");
-                document.getElementById("grupo__usuario").classList.add("formulario__grupo-correcto");
-                document.querySelector("#grupo__usuario i").classList.remove("fa-times-circle");
-                document.querySelector("#grupo__usuario i").classList.add("fa-check-circle");
-                //eliminamos el mensaje de error
-                document.querySelector("#grupo__usuario .formulario__input-error").classList.remove("formulario__input-error-activo");
-            } else {
-                //si falso
-                document.getElementById("grupo__usuario").classList.remove("formulario__grupo-correcto");
-                document.getElementById("grupo__usuario").classList.add("formulario__grupo-incorrecto");
-                document.querySelector("#grupo__usuario i").classList.remove("fa-check-circle");
-                document.querySelector("#grupo__usuario i").classList.add("fa-times-circle");
-                //mostramos el mensaje de error
-                document.querySelector("#grupo__usuario .formulario__input-error").classList.add("formulario__input-error-activo");
-            }
-
+            validarCampo(expresiones.usuario, e.target, 'usuario');
+            //3º - Pasamos por parámetros los tres valores que necesita la función
             break;
         case "nombre":
 
@@ -66,42 +44,40 @@ const validarFormulario = function (e) {
     }
 };
 
-/*mismo código en ES6
-const validarFormulario = () => {
-    //console.log("validar formulario");
-    //console.log(e.target.name);
-    switch (e.target.name) {//usamos el atributo 'name' del html para identificar el input en el que estamos
-        case "usuario":
-            //console.log("usuario");
-            break;
-        case "nombre":
-            //console.log("nombre");
-            break;
-        case "password":
-            //console.log("password");
-            break;
-        case "password2":
-            //console.log("password2");
-            break;
-        case "correo":
-            //console.log("correo");
-            break;
-        case "telefono":
-            //console.log("telefono");
-            break;
-
-    }
-};
-*/
 
 inputs.forEach(function (input) {
     input.addEventListener('keyup', validarFormulario);
     input.addEventListener('blur', validarFormulario);
 });
 
-/*mismo código en ES6
-inputs.forEach((input) => {
-    input.addEventListener('keyup', validarFormulario);
-    input.addEventListener('blur', validarFormulario);
-});
+/*
+    2º.- A la función tenemos que pasarle 3 valores:
+        - La expresión a comparar.
+        - El input donde se va a realizar la validación.
+        - El campo. Ej. grupo__usuario, grupo__password, etc. Queremos que sea
+          dinámico. 
 */
+
+const validarCampo = function (expresion, input, campo) {
+
+    if (expresion.test(input.value)) {
+        //si verdadero
+        document.getElementById(`grupo__${campo}`).classList.remove("formulario__grupo-incorrecto");
+        document.getElementById(`grupo__${campo}`).classList.add("formulario__grupo-correcto");
+        document.querySelector(`#grupo__${campo} i`).classList.remove("fa-times-circle");
+        document.querySelector(`#grupo__${campo} i`).classList.add("fa-check-circle");
+        //eliminamos el mensaje de error
+        document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove("formulario__input-error-activo");
+    } else {
+        //si falso
+        document.getElementById(`grupo__${campo}`).classList.remove("formulario__grupo-correcto");
+        document.getElementById(`grupo__${campo}`).classList.add("formulario__grupo-incorrecto");
+        document.querySelector(`#grupo__${campo} i`).classList.remove("fa-check-circle");
+        document.querySelector(`#grupo__${campo} i`).classList.add("fa-times-circle");
+        //mostramos el mensaje de error
+        document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add("formulario__input-error-activo");
+    }
+
+    //4º - Sustituimos las comillas simples o dobles por "`" (símbolo de la tilde) y
+    //     añadimos el "campo", ${campo}. 
+}
