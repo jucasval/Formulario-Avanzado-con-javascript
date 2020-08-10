@@ -27,6 +27,8 @@ const validarFormulario = function (e) {//1º. Validamos el resto de imputs, men
             break;
         case "password":
             validarCampo(expresiones.password, e.target, 'password');
+            //4º.- Agregamos validarPassword2()
+            validarPassword2();
             break;
         case "password2":
             //2º. Validamos password2. Creamos una función para ello.
