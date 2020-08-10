@@ -12,7 +12,6 @@ const formulario = document.getElementById("formulario");
 
 const inputs = document.querySelectorAll("#formulario input");
 
-//2º.- Objeto "campos"
 const campos = {
     usuario: false,
     nombre: false,
@@ -24,13 +23,29 @@ const campos = {
 formulario.addEventListener('submit', function (e) {
     e.preventDefault();
 
+    //1º - Validamos los "terminos y condiciones".
+    const terminos = document.getElementById("terminos");
 
-
-    //1º - Validamos que todos los cammpos del formulario son correctos a la hora
-    // de pulsar el botón enviar. Para ello nos declaramos el objeto "campos".
-    if (campos.usuario && campos.nombre && campos.password && campos.correo && campos.telefono) {
-        //7º - Si todos los campos son 'true'. Reseteamo sel formulario
+    if (campos.usuario && campos.nombre && campos.password && campos.correo
+        && campos.telefono && terminos.checked) {
+        //2º - Añadimos a la condicion que los termindos estan 'checked'. 
         formulario.reset();
+
+        //3º - Mostramos el mensaje de exito al enviar el formulario durante 5 segundos
+        document.getElementById("formulario__mensaje-exito").classList.add("formulario__mensaje-exito-activo");
+
+        setTimeout(function () {
+            document.getElementById("formulario__mensaje-exito").classList.remove("formulario__mensaje-exito-activo");
+        }, 5000);
+
+        //4º - Eliminamos la palomita de los inputs. 
+        document.querySelectorAll(".formulario__grupo-correcto").forEach(function (icono) {
+            icono.classList.remove('formulario__grupo-correcto');
+        });
+
+    } else {
+        //5º - Mostramos el mensaje de error del formulario
+        document.getElementById('formulario__mensaje').classList.add("formulario__mensaje-activo");
     }
 
 
@@ -79,7 +94,6 @@ const validarCampo = function (expresion, input, campo) {
         //eliminamos el mensaje de error
         document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove("formulario__input-error-activo");
 
-        //3º - Ponemos el campo a true
         campos[campo] = true;
     } else {
         //si falso
@@ -90,14 +104,12 @@ const validarCampo = function (expresion, input, campo) {
         //mostramos el mensaje de error
         document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add("formulario__input-error-activo");
 
-        //4º .- Ponemos el campo a false
         campos[campo] = false;
     }
 
 
 };
 
-//3º - Función para comprobar que ambas contraseñas son iguales o no. 
 const validarPassword2 = function () {
     const inputPassword1 = document.getElementById("password");
     const inputPassword2 = document.getElementById("password2");
@@ -109,8 +121,6 @@ const validarPassword2 = function () {
         document.querySelector(`#grupo__password2 i`).classList.add("fa-times-circle");
         //mostramos el mensaje de error
         document.querySelector(`#grupo__password2 .formulario__input-error`).classList.add("formulario__input-error-activo");
-
-        //5º .- Ponemos el campo a false
         campos['password'] = false;
     } else {
         document.getElementById(`grupo__password2`).classList.add("formulario__grupo-correcto");
@@ -119,8 +129,6 @@ const validarPassword2 = function () {
         document.querySelector(`#grupo__password2 i`).classList.remove("fa-times-circle");
         //mostramos el mensaje de error
         document.querySelector(`#grupo__password2 .formulario__input-error`).classList.remove("formulario__input-error-activo");
-
-        //6º .- Ponemos el campo a true
         campos["password"] = true;
     }
 }
