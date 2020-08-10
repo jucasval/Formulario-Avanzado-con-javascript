@@ -12,12 +12,32 @@ const formulario = document.getElementById("formulario");
 
 const inputs = document.querySelectorAll("#formulario input");
 
+//2º.- Objeto "campos"
+const campos = {
+    usuario: false,
+    nombre: false,
+    password: false,
+    correo: false,
+    telefono: false
+};
+
 formulario.addEventListener('submit', function (e) {
-    e.preventDefault(); //como es prueba y los datos no se envían realmente a ningún sitio, 
-    //evitamos que se ejecute el evento
+    e.preventDefault();
+
+
+
+    //1º - Validamos que todos los cammpos del formulario son correctos a la hora
+    // de pulsar el botón enviar. Para ello nos declaramos el objeto "campos".
+    if (campos.usuario && campos.nombre && campos.password && campos.correo && campos.telefono) {
+        //7º - Si todos los campos son 'true'. Reseteamo sel formulario
+        formulario.reset();
+    }
+
+
+
 });
 
-const validarFormulario = function (e) {//1º. Validamos el resto de imputs, menos password2. 
+const validarFormulario = function (e) {
     switch (e.target.name) {
         case "usuario":
             validarCampo(expresiones.usuario, e.target, 'usuario');
@@ -27,15 +47,13 @@ const validarFormulario = function (e) {//1º. Validamos el resto de imputs, men
             break;
         case "password":
             validarCampo(expresiones.password, e.target, 'password');
-            //4º.- Agregamos validarPassword2()
             validarPassword2();
             break;
         case "password2":
-            //2º. Validamos password2. Creamos una función para ello.
             validarPassword2();
             break;
         case "correo":
-            validarCampo(expresiones.correo, 'correo');
+            validarCampo(expresiones.correo, e.target, 'correo');
             break;
         case "telefono":
             validarCampo(expresiones.telefono, e.target, 'telefono');
@@ -60,6 +78,9 @@ const validarCampo = function (expresion, input, campo) {
         document.querySelector(`#grupo__${campo} i`).classList.add("fa-check-circle");
         //eliminamos el mensaje de error
         document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove("formulario__input-error-activo");
+
+        //3º - Ponemos el campo a true
+        campos[campo] = true;
     } else {
         //si falso
         document.getElementById(`grupo__${campo}`).classList.remove("formulario__grupo-correcto");
@@ -68,6 +89,9 @@ const validarCampo = function (expresion, input, campo) {
         document.querySelector(`#grupo__${campo} i`).classList.add("fa-times-circle");
         //mostramos el mensaje de error
         document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add("formulario__input-error-activo");
+
+        //4º .- Ponemos el campo a false
+        campos[campo] = false;
     }
 
 
@@ -85,6 +109,9 @@ const validarPassword2 = function () {
         document.querySelector(`#grupo__password2 i`).classList.add("fa-times-circle");
         //mostramos el mensaje de error
         document.querySelector(`#grupo__password2 .formulario__input-error`).classList.add("formulario__input-error-activo");
+
+        //5º .- Ponemos el campo a false
+        campos['password'] = false;
     } else {
         document.getElementById(`grupo__password2`).classList.add("formulario__grupo-correcto");
         document.getElementById(`grupo__password2`).classList.remove("formulario__grupo-incorrecto");
@@ -92,5 +119,8 @@ const validarPassword2 = function () {
         document.querySelector(`#grupo__password2 i`).classList.remove("fa-times-circle");
         //mostramos el mensaje de error
         document.querySelector(`#grupo__password2 .formulario__input-error`).classList.remove("formulario__input-error-activo");
+
+        //6º .- Ponemos el campo a true
+        campos["password"] = true;
     }
 }
