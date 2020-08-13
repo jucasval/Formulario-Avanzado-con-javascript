@@ -40,6 +40,8 @@ formulario.addEventListener('submit', function (e) {
             icono.classList.remove('formulario__grupo-correcto');
         });
 
+        document.getElementById('formulario__mensaje').classList.remove("formulario__mensaje-activo");
+
     } else {
         document.getElementById('formulario__mensaje').classList.add("formulario__mensaje-activo");
     }
